@@ -130,3 +130,8 @@ function mouseClicked() {
     startPerlin = true;
     redraw();
 }
+
+function touchStarted() {
+    startPerlin = true;
+    redraw();
+}
