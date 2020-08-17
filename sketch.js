@@ -31,7 +31,7 @@ function setup() {
     // Calculate tree root coordinates
     for (let i = 0; i < forestSize; i++) {
         root = createVector(random(0, windowWidth), random(height - 90, height))
-        treeRoots.push({ 'root': root, 'sz': random(8, 12) });
+        treeRoots.push({ 'root': root, 'sz': random(5, 10) });
     }
     for (let i = 0; i < treeRoots.length; i++) {
         createdTrees.push(new Branch(treeRoots[i]['sz'], treeRoots[i]['root'], 0, i));
