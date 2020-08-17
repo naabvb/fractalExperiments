@@ -26,6 +26,31 @@ var grads = [
     [{color:"090401",position:50},{color:"4B1D06",position:100}],
     [{color:"00000c",position:80},{color:"150800",position:100}],
 ];
+
+
+
+
+//function drawGradient() {
+//  let color1 = color(74,73,105);  //top
+//  let color2 = color(205,130,160); //bottom
+//  setGradient(0, 0, windowWidth, windowHeight, color1, color2, "Y");
+//
+//}
+//
+//function setGradient(x, y, w, h, c1, c2, axis) {
+//  noFill();
+//  if (axis == "Y") {  // Top to bottom gradient
+//      for (let i = y; i <= y + h; i++) {
+//          let inter = map(i, y, y + (h * 1.3), 0, 1);
+//          let c = lerpColor(c1, c2, inter);
+//          stroke(c);
+//          line(x, i, x + w, i);
+//      }
+//  }
+//}
+//// More cool colors
+
+
 var inx = -1;  
 function toCSSGradient(data)
 { 
@@ -58,5 +83,5 @@ function setGradient(nInx)
     canvas.elt.style.backgroundImage='-moz-' + css;
     canvas.elt.style.backgroundImage='' + css;
   }
-  
-}
+} 
+//
