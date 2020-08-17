@@ -12,7 +12,7 @@ class Branch {
         this.show = function () {
            // console.log('drawn')
             strokeWeight(this.girth);
-            stroke(this.girth -10);
+            stroke(this.girth -1);
             line(this.startx, this.starty, this.endx, this.endy);
             //if (done) {
             //    console.log(this.girth);
@@ -44,14 +44,31 @@ class Branch {
             let directionB = direction *0.9 -angle*branchA;
             created.push(new Branch(girth *sqrt(branchA), createVector(start.x, start.y), directionA, this.treenum));
             created.push(new Branch(girth *sqrt(branchB), createVector(start.x, start.y), directionB, this.treenum));
-           // if(girth < 1 && random(1) < 0.1) drawFruit(start);
+            if(girth < 1.2 && random(1) < 0.1) {
+                leafs.push(new Leaf(start));
+            }
         }
-
-
-
-
-
     }
-
-
 }
+
+class Leaf {
+    constructor(position) {
+        this.position = position
+        this.val = random(1,10)
+
+        this.show = function () {
+            noStroke()
+            if (this.val > 5) {
+                fill(255,250,240);
+            }
+            else {
+                fill(255, 183, 197);
+            }
+           // let sz = 4
+	        ellipse(this.position.x, this.position.y+6, 2,4);
+
+         };
+    }
+}
+
+

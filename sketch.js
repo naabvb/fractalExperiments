@@ -3,6 +3,7 @@ var loadingIcon;
 var size;
 var trees = [];
 var created = [];
+var leafs = [];
 
 var blue = '#325876';
 //var blue = color(50, 88, 118);
@@ -33,7 +34,7 @@ function setup() {
         size = 2
     }
     else {
-        size = random(2, 5);
+        size = random(4, 7);
     }
     //  size = random(2, 5);
     // noLoop();
@@ -53,6 +54,7 @@ function setup() {
     for (let i = 0; i < trees.length; i++) {
         created.push(new Branch(trees[i]['sz'], trees[i]['root'], 0, i));
     }
+    //console.log(leafs)
 
 
     // for (let i = 0; i < trees.length; i++) {
@@ -102,6 +104,10 @@ function draw() {
         drawTree(i);
         //fill(0,64,128,48);
         //console.log('drwan')
+    }
+
+    for (let i = 0; i< leafs.length; i++) {
+        leafs[i].show()
     }
 
     //drawClouds();
