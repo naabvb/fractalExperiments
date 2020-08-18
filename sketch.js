@@ -52,11 +52,11 @@ function draw() {
     if (!startPerlin && !setupDone) {
         field.render();
         field.render();
+        drawClouds();
     }
 
     // If mouse clicked, start perlin noise
     if (startPerlin) field.render();
-
     drawLandscape();
     drawGround();
     drawTrees();
@@ -100,6 +100,18 @@ function drawLandscape() {
         vertex(landscapeCoordinates[i]['x'], landscapeCoordinates[i]['y']);
     }
     endShape();
+}
+
+// Draw some clouds
+function drawClouds() {
+    let inverseDetail = 5;
+    for (let y = 0; y < height; y += inverseDetail) {
+        for (let x = 0; x < width; x += inverseDetail) {
+            n = noise(x / 200., y / 100., 0);
+            fill(70, 83, 117, n * map(y, 0, height * 0.60, 100, 0));
+            rect(x, y, inverseDetail, inverseDetail);
+        }
+    }
 }
 
 // Draw foreground
