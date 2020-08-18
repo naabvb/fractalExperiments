@@ -10,17 +10,17 @@ var field;
 var scale;
 var bounds;
 
-var setupDone = false
-var startPerlin = false
+var setupDone = false;
+var startPerlin = false;
 
 function setup() {
     canvas = createCanvas(windowWidth, windowHeight);
     canvas.hide();
 
     // Set background gradient based on presets in background.js
-    setGradient(20)
+    setGradient(20);
 
-    loadingIcon = document.getElementById('loaderIcon')
+    loadingIcon = document.getElementById('loaderIcon');
 
     // Probably unnecessary scaling
     if (windowWidth < 100) forestSize = 2;
@@ -30,7 +30,7 @@ function setup() {
 
     // Calculate tree root coordinates
     for (let i = 0; i < forestSize; i++) {
-        root = createVector(random(0, windowWidth), random(height - 90, height))
+        root = createVector(random(0, windowWidth), random(height - 90, height));
         treeRoots.push({ 'root': root, 'sz': random(5, 10) });
     }
     for (let i = 0; i < treeRoots.length; i++) {
@@ -39,7 +39,7 @@ function setup() {
 
     scale = random(8e2, 2e3);
 
-    field = new ParticleSystem()
+    field = new ParticleSystem();
     field.colors = getColor();
     field.build(2000);
     createLandscape();
@@ -58,7 +58,7 @@ function draw() {
     if (startPerlin) field.render();
 
     drawLandscape();
-    drawGround()
+    drawGround();
     drawTrees();
     drawLeafs();
 
@@ -87,9 +87,9 @@ function createLandscape() {
     for (let i = 0; i <= width; i += 2) {
         n = noise(i / dx, j / dy);
         n = map(n, 0, 1, 0, height / 2 - j);
-        landscapeCoordinates.push({ 'x': i, 'y': height - n })
+        landscapeCoordinates.push({ 'x': i, 'y': height - n });
     }
-    landscapeCoordinates.push({ 'x': width, 'y': height })
+    landscapeCoordinates.push({ 'x': width, 'y': height });
 }
 
 // Draw landscape using the previously generated coordinates
@@ -97,16 +97,16 @@ function drawLandscape() {
     beginShape();
     fill(color(24, 16, 8))
     for (let i = 0; i < landscapeCoordinates.length; i++) {
-        vertex(landscapeCoordinates[i]['x'], landscapeCoordinates[i]['y'])
+        vertex(landscapeCoordinates[i]['x'], landscapeCoordinates[i]['y']);
     }
     endShape();
 }
 
 // Draw foreground
 function drawGround() {
-    fill(color(28, 19, 8))
+    fill(color(28, 19, 8));
     rect(0, height - 100, width, height / 10);
-    fill(color(28, 19, 8))
+    fill(color(28, 19, 8));
 }
 
 // Draws the trees previously generated
@@ -120,7 +120,7 @@ function drawTrees() {
 function drawTree(a) {
     for (let i = 0; i < createdTrees.length; i++) {
         if (createdTrees[i].treenum == a) {
-            createdTrees[i].show()
+            createdTrees[i].show();
         }
     }
 }
@@ -128,10 +128,19 @@ function drawTree(a) {
 // On mouse click, start perlin noise
 function mouseClicked() {
     startPerlin = true;
+    fadeOut();
     redraw();
 }
 
 function touchStarted() {
     startPerlin = true;
+    fadeOut();
     redraw();
+}
+
+function fadeOut() {
+    let e = document.getElementById('footer_block3');
+    e.style.animationDelay = '1s';
+    e.style.animation = 'fadeout 2s';
+    e.style.webkitAnimation = 'fadeout 2s';
 }

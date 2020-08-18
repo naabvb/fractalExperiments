@@ -46,8 +46,8 @@ class Branch {
 // Class for generating and showing the leafs. Currently splits between two colors
 class Leaf {
     constructor(position) {
-        this.position = position
-        this.val = random(1, 10)
+        this.position = position;
+        this.val = random(1, 10);
 
         this.show = function () {
             noStroke()
