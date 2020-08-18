@@ -1,5 +1,5 @@
 # Fractal Experiments
 
-This started out as fractal tree testing, but it now also has generated landscape and stars/perlin noise.
+This started out as fractal tree testing, but it now includes generated landscape, clouds and stars/perlin noise.
 
 Check it out at -> https://pimiä.com
