@@ -21,7 +21,7 @@ class Branch {
         for (let i = 0; i < random(2, 6); i++) {
             let end = createVector(start.x + sin(direction) * girth * 2.5, start.y - cos(direction) * girth * 2.5);
             this.endx = end.x;
-            this.endy = end.y
+            this.endy = end.y;
             start.x = end.x;
             start.y = end.y;
             direction += random(0.3) - random(0.3);

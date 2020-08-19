@@ -2,6 +2,7 @@ var canvas;
 var loadingIcon;
 var forestSize;
 var treeRoots = [];
+var trunkCoordinates = [];
 var createdTrees = [];
 var leafs = [];
 var landscapeCoordinates = [];
@@ -31,7 +32,9 @@ function setup() {
     // Calculate tree root coordinates
     for (let i = 0; i < forestSize; i++) {
         root = createVector(random(0, windowWidth), random(height - 90, height));
-        treeRoots.push({ 'root': root, 'sz': random(5, 10) });
+        sz = random(5, 10);
+        trunkCoordinates.push({ 'root': { ...root }, 'sz': sz }); // Hack to create a shallow copy for shadows since the original root values need to get changed.
+        treeRoots.push({ 'root': root, 'sz': sz });
     }
     for (let i = 0; i < treeRoots.length; i++) {
         createdTrees.push(new Branch(treeRoots[i]['sz'], treeRoots[i]['root'], 0, i));
@@ -130,11 +133,22 @@ function drawTrees() {
 
 // Draws a tree and all it's branches
 function drawTree(a) {
+    drawTreeBase(a);
     for (let i = 0; i < createdTrees.length; i++) {
         if (createdTrees[i].treenum == a) {
             createdTrees[i].show();
         }
     }
+    drawTreeBase(a);
+}
+
+// Draws a sort of base on the tree trunk
+function drawTreeBase(a) {
+    noStroke();
+    fill(28, 14, 8);
+    ellipseMode(CENTER);
+    ellipse(trunkCoordinates[a].root.x, trunkCoordinates[a].root.y + 4, 50, trunkCoordinates[a].sz + 2);
+    fill(28, 14, 8);
 }
 
 // On mouse click, start perlin noise
