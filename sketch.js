@@ -31,15 +31,17 @@ function setup() {
 
     // Calculate tree root coordinates
     for (let i = 0; i < forestSize; i++) {
-        root = createVector(random(0, windowWidth), random(height - 90, height));
+        root = createVector(random(0, windowWidth), random(height - 80, height));
         sz = random(5, 10);
         trunkCoordinates.push({ 'root': { ...root }, 'sz': sz }); // Hack to create a shallow copy for shadows since the original root values need to get changed.
         treeRoots.push({ 'root': root, 'sz': sz });
     }
+    treeRoots.sort((a, b) => (a.root.y > b.root.y) ? 1 : -1); // Sort both arrays so that trees get build in an order based on y-axis
+    trunkCoordinates.sort((a, b) => (a.root.y > b.root.y) ? 1 : -1);
+
     for (let i = 0; i < treeRoots.length; i++) {
         createdTrees.push(new Branch(treeRoots[i]['sz'], treeRoots[i]['root'], 0, i));
     }
-
     scale = random(8e2, 2e3);
 
     field = new ParticleSystem();
@@ -98,7 +100,7 @@ function createLandscape() {
 // Draw landscape using the previously generated coordinates
 function drawLandscape() {
     beginShape();
-    fill(color(24, 16, 8))
+    fill(color(18, 18, 18))
     for (let i = 0; i < landscapeCoordinates.length; i++) {
         vertex(landscapeCoordinates[i]['x'], landscapeCoordinates[i]['y']);
     }
@@ -119,8 +121,9 @@ function drawClouds() {
 
 // Draw foreground
 function drawGround() {
+    rectMode(CORNER);
     fill(color(28, 19, 8));
-    rect(0, height - 100, width, height / 10);
+    rect(0, height * 0.90, width, height * 0.85);
     fill(color(28, 19, 8));
 }
 
@@ -142,7 +145,7 @@ function drawTree(a) {
     drawTreeBase(a);
 }
 
-// Draws a sort of base on the tree trunk
+// Draws base on the tree trunk
 function drawTreeBase(a) {
     noStroke();
     fill(28, 14, 8);
